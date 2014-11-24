@@ -1,0 +1,23 @@
+{
+    "name": "outeredge/edge-magento-module-responsiveimages",
+    "type": "magento-module",
+    "description": "Responsive Images Module by outer/edge",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "outer/edge",
+            "email": "support@outeredgeuk.com"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "extra": {
+        "map": [
+            ["app/code/local/Edge/ResponsiveImages", "app/code/local/Edge/ResponsiveImages"],
+            ["app/etc/modules/Edge_ResponsiveImages.xml", "app/etc/modules/Edge_ResponsiveImages.xml"],
+            ["app/design/frontend/base/default/layout/responsiveimages.xml", "app/design/frontend/base/default/layout/responsiveimages.xml"],
+            ["app/design/frontend/base/default/template/responsiveimages", "app/design/frontend/base/default/template/responsiveimages"]
+        ]
+    }
+}

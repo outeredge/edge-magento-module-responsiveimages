@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+
+    <responsiveimages_product_list>
+        <reference name="category.products">
+            <action method="setTemplate">
+                <template>responsiveimages/category/view.phtml</template>
+            </action>
+            <reference name="product_list">
+                <action method="setTemplate">
+                    <template>responsiveimages/product/list.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </responsiveimages_product_list>
+
+    <catalog_category_default>
+        <update handle="responsiveimages_product_list"/>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <update handle="responsiveimages_product_list"/>
+    </catalog_category_layered>
+
+    <catalog_product_view>
+        <reference name="product.info">
+            <reference name="product.info.media">
+                <action method="setTemplate">
+                    <template>responsiveimages/product/view/media.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </catalog_product_view>
+
+</layout>
