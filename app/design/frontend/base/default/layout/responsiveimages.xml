@@ -21,6 +21,16 @@
         <update handle="responsiveimages_product_list"/>
     </catalog_category_layered>
 
+    <catalogsearch_result_index>
+        <reference name="search.result">
+            <reference name="search_result_list">
+                <action method="setTemplate">
+                    <template>responsiveimages/product/list.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </catalogsearch_result_index>
+
     <catalog_product_view>
         <reference name="product.info">
             <reference name="product.info.media">
