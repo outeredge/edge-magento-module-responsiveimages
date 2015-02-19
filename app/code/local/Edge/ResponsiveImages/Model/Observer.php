@@ -9,11 +9,15 @@ class Edge_ResponsiveImages_Model_Observer
         $product = $event->getProduct();
 
         $mediaGallery = $product->getMediaGallery();
-        $images = json_decode($mediaGallery['images'], true);
+        if (is_string($mediaGallery['images'])) {
+            $images = json_decode($mediaGallery['images'], true);
 
-        foreach ($images as $image){
-            if (preg_match('/\.tmp$/', $image['file'])){
-                $this->_queueProductGenerate = true;
+            if (!empty($images)) {
+                foreach ($images as $image){
+                    if (preg_match('/\.tmp$/', $image['file'])){
+                        $this->_queueProductGenerate = true;
+                    }
+                }
             }
         }
     }
