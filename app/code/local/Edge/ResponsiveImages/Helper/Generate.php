@@ -40,17 +40,19 @@ class Edge_ResponsiveImages_Helper_Generate extends Mage_Core_Helper_Abstract
             return;
         }
 
+        $categoryImageDir = DS . 'catalog' . DS . 'category';
+
         foreach (array('image', 'thumbnail') as $imageType) {
-            $imageName = $category->getData($imageType);
+            $imageName = DS . $category->getData($imageType);
 
             foreach ($this->_sizes as $size) {
                 if ($size['section'] !== 'category_view') {
                     continue;
                 }
 
-                $imagePath = $size['dir'] . DS . $imageName;
+                $imagePath = $size['dir'] . $imageName;
                 if (!file_exists($imagePath)) {
-                    $image = new Varien_Image(Mage::getBaseDir('media') . DS . 'catalog' . DS . 'category' . DS . $imageName);
+                    $image = new Varien_Image(Mage::getBaseDir('media') . $categoryImageDir . $imageName);
                     $image->resize($size['size']);
                     $image->save($imagePath);
                 }
@@ -67,10 +69,16 @@ class Edge_ResponsiveImages_Helper_Generate extends Mage_Core_Helper_Abstract
             return;
         }
 
-        $mediaGallery = $product->getMediaGallery();
-        if ($mediaGallery && !empty($mediaGallery['images'])) {
-            foreach ($mediaGallery['images'] as $image) {
-                $imageName = $image['file'];
+        $productImageDir = DS . 'catalog' . DS . 'product';
+
+        $mediaGallery = $product->getMediaGalleryImages();
+        if ($mediaGallery && !empty($mediaGallery)) {
+            foreach ($mediaGallery as $image) {
+                $imageName = $image->getFile();
+
+                if (Mage::helper('core/file_storage_database')->checkDbUsage()) {
+                    Mage::helper('core/file_storage_database')->saveFileToFilesystem($productImageDir . $imageName);
+                }
 
                 foreach ($this->_sizes as $size) {
                     if ($size['section'] === 'category_view') {
@@ -79,7 +87,7 @@ class Edge_ResponsiveImages_Helper_Generate extends Mage_Core_Helper_Abstract
 
                     $imagePath = $size['dir'] . $imageName;
                     if (!file_exists($imagePath)) {
-                        $image = new Varien_Image(Mage::getBaseDir('media') . DS . 'catalog' . DS . 'product' . $imageName);
+                        $image = new Varien_Image(Mage::getBaseDir('media') . $productImageDir . $imageName);
                         $image->resize($size['size']);
                         $image->save($imagePath);
                     }

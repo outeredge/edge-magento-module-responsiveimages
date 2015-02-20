@@ -44,7 +44,13 @@ class Edge_ResponsiveImages_Helper_Data extends Mage_Core_Helper_Abstract
         if ($this->_usePicture) {
             $html = '<picture>';
             foreach ($this->getSizes($section) as $size){
-                $html.= '<source media="(max-width: ' . $size['viewport'] . 'px)" srcset="' . $this->_mediaPath . $size['size'] . DS . $imageUrl . '">';
+
+                if (($imageUrl) && (0 !== strpos($imageUrl, '/', 0))) {
+                    $imageUrl = '/' . $imageUrl;
+                }
+
+                $html.= '<source media="(max-width: ' . $size['viewport'] . 'px)" '
+                        . 'srcset="' . $this->_mediaPath . $size['size'] . $imageUrl . '">';
             }
             $html.= '<img src="' . $baseImgSrc . '" alt="' . $imageLabel . '">';
             $html.= '</picture>';
