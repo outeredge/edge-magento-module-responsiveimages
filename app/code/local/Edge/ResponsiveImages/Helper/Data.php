@@ -5,10 +5,20 @@ class Edge_ResponsiveImages_Helper_Data extends Mage_Core_Helper_Abstract
     protected $_usePicture;
     protected $_mediaPath;
 
+    protected $_width;
+    protected $_height=null;
+
     public function __construct()
     {
         $this->_usePicture = Mage::getStoreConfig('catalog/responsiveimages/type') === 'picture';
         $this->_mediaPath = Mage::getBaseUrl('media') . 'catalog' . DS . 'responsiveimages' . DS;
+    }
+
+    public function setSize($width, $height=null)
+    {
+        $this->_width = $width;
+        $this->_height = $height;
+        return $this;
     }
 
     public function getCategoryImageHtml($category)
@@ -30,6 +40,9 @@ class Edge_ResponsiveImages_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         $baseImgSrc = Mage::helper('catalog/image')->init($product, $imageType);
+        if ($this->_width) {
+            $baseImgSrc->resize($this->_width, $this->_height);
+        }
 
         $html = $this->getImageHtml($section, $baseImgSrc, $imageUrl, $imageLabel);
         if ($section === 'product_view' && Mage::getStoreConfig('catalog/responsiveimages/link')) {
