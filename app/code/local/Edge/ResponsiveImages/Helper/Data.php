@@ -74,7 +74,7 @@ class Edge_ResponsiveImages_Helper_Data extends Mage_Core_Helper_Abstract
                 $sources[] = $this->_mediaPath . $size['size'] . $imageUrl . ' ' . $size['viewport'] . 'w';
             }
 
-            $html = '<img src="' . $baseImgSrc . '" srcset="' . implode(', ', $sources) . '" alt="' . $imageLabel . '"';
+            $html = '<img src="' . $baseImgSrc . '" srcset="' . implode(', ', $sources) . '" alt="' . $imageLabel . '">';
         }
         return $html;
     }
