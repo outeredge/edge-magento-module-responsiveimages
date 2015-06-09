@@ -26,7 +26,7 @@ class Edge_ResponsiveImages_Helper_Data extends Mage_Core_Helper_Abstract
         $imageUrl = $category->getImage();
         $imageLabel = $category->getName();
 
-        $baseImgSrc = $category->getImageUrl();
+        $baseImgSrc = Mage::helper('edge/image')->getImage('catalog' . DS .'category' . $imageUrl);
 
         return $this->getImageHtml('category_view', $baseImgSrc, $imageUrl, $imageLabel);
     }
