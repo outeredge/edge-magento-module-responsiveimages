@@ -45,10 +45,6 @@ class Edge_ResponsiveImages_Helper_Generate extends Mage_Core_Helper_Abstract
         foreach (array('image', 'thumbnail') as $imageType) {
             $imageName = DS . $category->getData($imageType);
 
-            if (Mage::helper('core/file_storage_database')->checkDbUsage()) {
-                Mage::helper('core/file_storage_database')->saveFileToFilesystem($categoryImageDir . $imageName);
-            }
-
             foreach ($this->_sizes as $size) {
                 if ($size['section'] !== 'category_view') {
                     continue;
@@ -79,10 +75,6 @@ class Edge_ResponsiveImages_Helper_Generate extends Mage_Core_Helper_Abstract
         if ($mediaGallery && !empty($mediaGallery)) {
             foreach ($mediaGallery as $image) {
                 $imageName = $image->getFile();
-
-                if (Mage::helper('core/file_storage_database')->checkDbUsage()) {
-                    Mage::helper('core/file_storage_database')->saveFileToFilesystem($productImageDir . $imageName);
-                }
 
                 foreach ($this->_sizes as $size) {
                     if ($size['section'] === 'category_view') {
