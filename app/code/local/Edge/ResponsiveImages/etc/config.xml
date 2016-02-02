@@ -53,13 +53,13 @@
     </global>
     <admin>
         <routers>
-            <responsiveimages>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Edge_ResponsiveImages</module>
-                    <frontName>responsiveimages</frontName>
+                    <modules>
+                        <responsiveimages before="Mage_Adminhtml">Edge_ResponsiveImages_Adminhtml</responsiveimages>
+                    </modules>
                 </args>
-            </responsiveimages>
+            </adminhtml>
         </routers>
     </admin>
     <frontend>

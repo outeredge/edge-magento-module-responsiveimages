@@ -1,7 +1,12 @@
 <?php
 
-class Edge_ResponsiveImages_AdminController extends Mage_Adminhtml_Controller_Action
+class Edge_ResponsiveImages_Adminhtml_ResponsiveImagesController extends Mage_Adminhtml_Controller_Action
 {
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('system/config/catalog');
+    }
+    
     public function generateAction()
     {
         $success = Mage::helper('responsiveimages/generate')->generateAll();
